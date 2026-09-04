@@ -979,9 +979,23 @@
   (function(){
     var app = document.getElementById('app');
     var btn = document.getElementById('langToggle');
+
+    function setLang(lang, updateUrl){
+      app.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      if (updateUrl){
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState(null, '', url);
+      }
+    }
+
+    var urlLang = new URL(window.location.href).searchParams.get('lang');
+    if (urlLang === 'fr' || urlLang === 'en') setLang(urlLang, false);
+
     btn.addEventListener('click', function(){
       var cur = app.getAttribute('data-lang');
-      app.setAttribute('data-lang', cur === 'fr' ? 'en' : 'fr');
+      setLang(cur === 'fr' ? 'en' : 'fr', true);
     });
   })();
 
