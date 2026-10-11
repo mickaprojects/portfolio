@@ -169,6 +169,7 @@
     display:inline-flex; align-items:center; gap:8px;
     padding:13px 22px;
     border-radius:999px;
+    font-family:inherit;
     font-size:.92rem; font-weight:600;
     text-decoration:none;
     border:1px solid transparent;
@@ -387,6 +388,10 @@
     font-size:.95rem;
     color:var(--clay);
   }
+  .contact-actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+  .copy-done{display:none;}
+  .is-copied .copy-label{display:none;}
+  .is-copied .copy-done{display:inline;}
 
   footer{
     padding:36px 0 60px;
@@ -457,7 +462,7 @@
         <p class="pitch fr">Je pilote des projets digitaux de A à Z — cadrage, méthode Scrum, coordination d'équipes pluridisciplinaires — et je les concrétise techniquement : sites WordPress &amp; Shopify, plateformes SaaS, applications de géolocalisation et d'automatisation (RPA), jusqu'au montage vidéo qui donne du rythme à une marque.</p>
         <p class="pitch en">I lead digital projects end-to-end — scoping, Scrum methodology, coordinating cross-functional teams — and deliver them technically: WordPress &amp; Shopify websites, SaaS platforms, geolocation and automation (RPA) applications, and short-form video edits that give a brand momentum.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:micka.andriamiadanarivo@gmail.com">
+          <a class="btn btn-primary" href="#contact">
             <span class="fr">Me contacter</span><span class="en">Get in touch</span>
           </a>
           <a class="btn btn-ghost" href="#work">
@@ -943,9 +948,13 @@
           <p class="en">A digital project to lead, a WordPress or Shopify site to build, an application to design, or a video to produce? Write to me, let's talk.</p>
           <a class="contact-email" href="mailto:micka.andriamiadanarivo@gmail.com">micka.andriamiadanarivo@gmail.com</a>
           <a class="contact-email" href="tel:+261330714996">+261 33 07 149 96</a>
-          <a class="btn btn-primary" href="mailto:micka.andriamiadanarivo@gmail.com">
-            <span class="fr">Envoyer un email</span><span class="en">Send an email</span>
-          </a>
+          <div class="contact-actions">
+            <button class="btn btn-primary" id="copyEmail" type="button" data-email="micka.andriamiadanarivo@gmail.com">
+              <span class="copy-label"><span class="fr">Copier l'email</span><span class="en">Copy email</span></span>
+              <span class="copy-done" aria-live="polite"><span class="fr">Copié !</span><span class="en">Copied!</span></span>
+            </button>
+            <a class="btn btn-ghost" href="https://wa.me/261330714996" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
       </div>
     </section>
@@ -955,7 +964,7 @@
     <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
       <span class="foot-name">© 2026 Micka A.</span>
       <div class="foot-links">
-        <a href="mailto:micka.andriamiadanarivo@gmail.com">Email</a>
+        <a href="#contact">Contact</a>
         <a href="#top"><span class="fr">Haut de page</span><span class="en">Back to top</span></a>
       </div>
     </div>
@@ -996,6 +1005,37 @@
     btn.addEventListener('click', function(){
       var cur = app.getAttribute('data-lang');
       setLang(cur === 'fr' ? 'en' : 'fr', true);
+    });
+  })();
+
+  (function(){
+    var copyBtn = document.getElementById('copyEmail');
+    var timer;
+
+    function done(){
+      copyBtn.classList.add('is-copied');
+      clearTimeout(timer);
+      timer = setTimeout(function(){ copyBtn.classList.remove('is-copied'); }, 2000);
+    }
+
+    function fallbackCopy(text){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { if (document.execCommand('copy')) done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    copyBtn.addEventListener('click', function(){
+      var email = copyBtn.getAttribute('data-email');
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(done, function(){ fallbackCopy(email); });
+      } else {
+        fallbackCopy(email);
+      }
     });
   })();
 
