@@ -371,6 +371,26 @@
   .video-body{padding:16px 18px 20px;}
   .video-body h3{font-size:.98rem; font-weight:600; line-height:1.3;}
   .video-body p{font-size:.87rem; color:var(--ink-soft); margin:8px 0 0;}
+  .video-feature{
+    background:var(--paper);
+    border:1px solid var(--sand);
+    border-radius:var(--radius);
+    overflow:hidden;
+    margin-bottom:22px;
+  }
+  .video-feature video{
+    display:block; width:100%;
+    aspect-ratio:1600/670;
+    background:#000;
+  }
+  .video-feature .video-body{padding:18px 20px 22px;}
+  .video-feature .video-body h3{font-size:1.08rem;}
+  .video-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--clay);
+    margin:0 0 6px;
+  }
 
   /* ---------- contact ---------- */
   .contact{
@@ -861,6 +881,16 @@
           <h2><span class="fr">Vidéo &amp; Motion design</span><span class="en">Video &amp; Motion design</span></h2>
           <p class="fr">Formats courts pensés pour capter l'attention en quelques secondes.</p>
           <p class="en">Short-form edits built to hook attention in seconds.</p>
+        </div>
+
+        <div class="video-feature">
+          <video src="media/velare-pub-cinema.mp4" poster="media/velare-poster.jpg" controls playsinline preload="none"></video>
+          <div class="video-body">
+            <p class="video-meta"><span class="fr">Pub cinéma · 20 s · 2K scope 2,39:1</span><span class="en">Cinema ad · 20 s · 2K scope 2.39:1</span></p>
+            <h3>VELARÉ — <span class="fr">L'or de la nuit</span><span class="en">The gold of the night</span></h3>
+            <p class="fr">Publicité de parfum pour le grand écran, entièrement réalisée à partir d'images générées et animées par IA : six plans, étalonnage commun, grain de film, sound design (vagues, vent, goutte) et titrage, calé à l'image près.</p>
+            <p class="en">A perfume commercial for the big screen, built entirely from AI-generated, AI-animated imagery: six shots, a unified color grade, film grain, sound design (waves, wind, the drop) and titles, timed to the frame.</p>
+          </div>
         </div>
 
         <div class="video-grid fr">
